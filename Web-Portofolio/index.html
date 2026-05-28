@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Ahmad Juanda</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- PENGATURAN DASAR --- */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fcfdfe; 
+            color: #3a3a3a; 
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* --- PENGATURAN MENU ATAS (HEADER LEBIH LUAS) --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95); 
+            color: #333;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 10px; 
+            z-index: 1000;
+            max-width: 1300px; 
+            margin: 0 auto; 
+            border-radius: 50px; 
+            box-shadow: 0 4px 20px rgba(0, 86, 179, 0.1); 
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0056b3;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #555;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #0056b3;
+        }
+
+        /* --- PENGATURAN ISI KONTEN UMUM (LEBIH LUAS & LEGA) --- */
+        section {
+            padding: 80px 20px; 
+            max-width: 1250px; 
+            margin: 0 auto;
+        }
+        
+        h2.section-title {
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 50px;
+            font-size: 32px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h2.section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #0056b3;
+            margin: 10px auto 0;
+            border-radius: 10px;
+        }
+
+        /* --- PENGATURAN BAGIAN PROFIL --- */
+        #profile {
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 120px; 
+            text-align: left;
+            gap: 50px; 
+        }
+
+        .profile-photo-container {
+            flex-shrink: 0; 
+        }
+
+        .profile-photo {
+            width: 220px;
+            height: 290px; 
+            border-radius: 20px; 
+            object-fit: cover; 
+            box-shadow: 0 10px 25px rgba(0, 86, 179, 0.12); 
+            border: 4px solid white; 
+        }
+
+        .profile-text-container {
+            flex-grow: 1;
+            max-width: 850px; 
+        }
+
+        .profile-text-container h1 {
+            font-size: 44px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .contact-info a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #004494;
+            text-decoration: underline;
+        }
+
+        /* Container Tombol Aksi */
+        .profile-action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .btn-linkedin {
+            display: inline-block;
+            background-color: #0056b3;
+            color: white !important;
+            padding: 11px 24px;
+            border-radius: 30px;
+            text-decoration: none !important;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 86, 179, 0.2);
+        }
+
+        .btn-linkedin:hover {
+            background-color: #004494;
+            transform: translateY(-2px);
+        }
+
+        .btn-cv {
+            display: inline-block;
+            background-color: transparent;
+            color: #2c3e50 !important;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none !important;
+            font-weight: 600;
+            font-size: 14px;
+            border: 2px solid #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cv:hover {
+            background-color: #2c3e50;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* --- Lencana Skills --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-badge {
+            background-color: #e6f0fa; 
+            color: #0056b3;
+            padding: 6px 14px;
+            border-radius: 20px; 
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #cce0f5;
+        }
+
+        /* --- PENGATURAN KARTU INFORMASI --- */
+        .info-card {
+            background-color: white;
+            border: 2px solid #e2e8f0; 
+            border-left: 8px solid #0056b3; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); 
+            padding: 40px; 
+            border-radius: 15px; 
+            margin-bottom: 35px;
+            width: 100%; 
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 86, 179, 0.08); 
+        }
+        
+        .info-card h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 24px; 
+        }
+
+        .info-card h3 a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-card h3 a:hover {
+            color: #0056b3; 
+            text-decoration: underline;
+        }
+
+        .info-card h4 {
+            color: #0056b3;
+            margin-bottom: 8px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .date-text {
+            color: #888;
+            font-size: 13px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .bullet-list {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .bullet-list li {
+            margin-bottom: 10px;
+        }
+        
+        /* --- PENGATURAN GALERI FOTO --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+            gap: 20px; 
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            background-color: #f8f9fa;
+            border-radius: 12px; 
+            overflow: hidden;
+            border: 2px solid #e2e8f0; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 170px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+            border-color: #0056b3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- DESAIN KHUSUS PENDIDIKAN --- */
+        .edu-flex-container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .edu-left-link {
+            text-decoration: none;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .edu-left-brand {
+            width: 240px;
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 2px solid #e2e8f0; 
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .edu-left-link:hover .edu-left-brand {
+            transform: translateY(-5px);
+            border-color: #0056b3;
+            box-shadow: 0 15px 35px rgba(0, 86, 179, 0.08);
+        }
+
+        .univ-logo-img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .univ-name-display {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .edu-left-link:hover .univ-name-display {
+            color: #0056b3;
+        }
+
+        .edu-right-details {
+            flex-grow: 1;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 2px solid #e2e8f0; 
+            border-left: 8px solid #0056b3; 
+        }
+
+        .org-badge-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .org-badge-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0; 
+        }
+
+        .org-role-main {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .org-year-badge {
+            background-color: white;
+            color: #888;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 2px solid #e2e8f0; 
+        }
+
+        .cert-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .cert-card-item {
+            background-color: #fcfdfe;
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none !important;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cert-card-item:hover {
+            transform: translateY(-4px);
+            border-color: #cce0f5;
+            background-color: #f6faff;
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.05);
+        }
+
+        .cert-title {
+            font-weight: 600;
+            color: #0056b3;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .cert-provider {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .cert-footer {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #888;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* --- PENGATURAN PREVIEW WEB (READ-ONLY & ZOOM OUT & SCROLLABLE) --- */
+        .web-preview-wrapper {
+            width: 100%;
+            height: 380px; 
+            overflow: hidden;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0; 
+            position: relative;
+            background-color: #f8f9fa;
+        }
+
+        .web-preview-iframe {
+            width: 133.33%; 
+            height: 506px; 
+            transform: scale(0.75); 
+            transform-origin: top left;
+            border: none;
+        }
+
+        /* --- PENGATURAN EMBED CONTAINER (Game Scratch) --- */
+        .embed-container {
+            background-color: #fff;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0; 
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            overflow: hidden; 
+        }
+
+        /* --- STYLE KATEGORI FILTER (TABS PORTOFOLIO) --- */
+        .portfolio-filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: white;
+            color: #2c3e50;
+            border: 2px solid #e2e8f0;
+            padding: 10px 24px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .filter-btn:hover {
+            border-color: #0056b3;
+            color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+        }
+
+        /* Kelas Pembantu untuk Menyembunyikan Proyek */
+        .portfolio-item {
+            display: none;
+        }
+        
+        .portfolio-item.show {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- RESPONSIVE UNTUK HP --- */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 25px;
+                top: 5px;
+                width: 95%;
+            }
+            nav {
+                gap: 15px;
+                font-size: 13px;
+            }
+            section {
+                padding: 60px 15px;
+            }
+            #profile {
+                flex-direction: column; 
+                text-align: center;
+                padding-top: 100px;
+                gap: 30px;
+            }
+            .profile-photo {
+                width: 190px;
+                height: 250px;
+            }
+            .profile-text-container h1 {
+                font-size: 34px;
+            }
+            .profile-action-buttons {
+                justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .edu-flex-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .edu-left-link {
+                width: 100%;
+            }
+            .edu-left-brand {
+                width: 100%;
+            }
+            .edu-right-details {
+                width: 100%;
+                padding: 25px;
+            }
+            .cert-card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .web-preview-wrapper {
+                height: 300px;
+            }
+            .web-preview-iframe {
+                width: 166.66%;
+                height: 500px;
+                transform: scale(0.6);
+            }
+            .portfolio-filter-container {
+                gap: 10px;
+            }
+            .filter-btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Ahmad Juanda</a>
+        <nav>
+            <a href="#profile">Profile</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#portfolio">Projects</a>
+        </nav>
+    </header>
+
+    <section id="profile">
+        <div class="profile-photo-container">
+            <img src="https://drive.google.com/thumbnail?id=1Ll06fvgywVXgwsMBWz9uY5QDJm3WbCA2&sz=w500" alt="Ahmad Juanda" class="profile-photo">
+        </div>
+        
+        <div class="profile-text-container">
+            <h1>Ahmad Juanda</h1>
+            <p class="contact-info">
+                Semarang, Indonesia | 
+                <a href="https://wa.me/6282250669569" target="_blank" title="Chat on WhatsApp">📲 +62 822-5066-9569</a> | 
+                <a href="mailto:juanxenaa@gmail.com" title="Send Email">✉️ juanxenaa@gmail.com</a>
+            </p>
+            
+            <div class="profile-action-buttons">
+                <a href="https://www.linkedin.com/in/ahmad-juanda-72b308209/" target="_blank" class="btn-linkedin">Connect on LinkedIn</a>
+                <a href="https://docs.google.com/document/d/1PSBhaa289ZDu9CVhVYb6a_2ZQfil30Hkg-rWE2HpQlM/export?format=pdf" class="btn-cv">📄 Download CV (PDF)</a>
+            </div>
+
+            <div class="info-card" style="margin-top: 30px; border-radius: 15px; padding: 25px; border-left: 2px solid #e2e8f0; background-color: #fcfdfe;">
+                <h4 style="margin-top: 0; color: #333;">Career Overview</h4>
+                <p style="font-size: 15px; color: #555;">Learning and Development Manager (Learning Operations) with 4+ years of experience in education technology, specializing in learning operations, student retention, and academic quality control. Proven ability to manage end-to-end class operations, tutor coordination, data processing, and performance reporting while maintaining strong relationships with parents and students. Fluent in English with strong communication, coordination, and analytical skills.</p>
+                
+                <h4 style="margin-top: 25px; color: #333;">Skills & Competencies</h4>
+                <div class="skills-container">
+                    <span class="skill-badge">CRM Tools</span>
+                    <span class="skill-badge">Microsoft Office</span>
+                    <span class="skill-badge">Google Workspace</span>
+                    <span class="skill-badge">Data Analysis</span>
+                    <span class="skill-badge">Reporting</span>
+                    <span class="skill-badge">Sales & Negotiation</span>
+                    <span class="skill-badge">Project Management</span>
+                    <span class="skill-badge">Leadership</span>
+                    <span class="skill-badge">Problem Solving</span>
+                    <span class="skill-badge">English (Fluent)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Work Experience</h2>
+        
+        <div class="info-card">
+            <h3><a href="https://algorithmics.org/" target="_blank">Algorithmics International Coding School</a></h3>
+            
+            <h4 style="margin-top: 15px;">Learning & Development Manager / Learning Operations Lead</h4>
+            <p class="date-text">May 2025 – Now</p>
+            <ul class="bullet-list">
+                <li>Led end-to-end learning operations, ensuring smooth coordination between tutors, students, parents, and management.</li>
+                <li>Managed student retention and class prolongation, handling objections and proactive follow-ups to minimize dropouts.</li>
+                <li>Oversaw daily office operations, including class readiness, tutor scheduling, and classroom logistics.</li>
+                <li>Acted as a backup instructor when needed to maintain learning continuity.</li>
+                <li>Designed, processed, and analyzed academic and operational data, producing regular reports for management and parents.</li>
+                <li>Developed and delivered training programs for tutors, including onboarding, teaching quality improvement, and performance evaluation.</li>
+                <li>Conducted quality control (QC) on teaching sessions to maintain instructional standards.</li>
+                <li>Built and maintained strong relationships with parents and students, ensuring satisfaction, trust, and long-term engagement.</li>
+                <li>Organized and executed educational events, workshops, and masterclasses to support enrollment and retention.</li>
+                <li>Prepared and ensured delivery of learning progress reports for parents.</li>
+                <li>Led the final stage of tutor recruitment, including interviews, assessments, and teaching evaluations.</li>
+                <li>Coordinated student grouping and tutor availability for optimal class composition.</li>
+                <li>Served as acting director during management absence, overseeing operational decision-making.</li>
+            </ul>
+            
+            <h5 style="margin-top: 10px; margin-bottom: 5px; color: #777; font-size: 14px; font-weight: 500;">Learning Operations Documentations:</h5>
+            <div class="gallery-grid">
+                <a href="https://drive.google.com/file/d/1C4HyhGjop-ltut2C4HXS6fBjd3jwR75Z/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1C4HyhGjop-ltut2C4HXS6fBjd3jwR75Z&sz=w400" alt="Algorithmics L&D Documentation 1">
+                </a>
+                <a href="https://drive.google.com/file/d/1Gd8S1nBqkh_7DQGSe2vtMwZvIIPlmXLP/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1Gd8S1nBqkh_7DQGSe2vtMwZvIIPlmXLP&sz=w400" alt="Algorithmics L&D Documentation 2">
+                </a>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #eee; margin: 30px 0;">
+
+            <h4>Quality Control</h4>
+            <p class="date-text">Jan 2025 – May 2025</p>
+            <ul class="bullet-list">
+                <li>Evaluated sales and class recordings using defined quality metrics.</li>
+                <li>Tracked performance using CRM and Google Sheets.</li>
+                <li>Prepared daily reports for sales improvement.</li>
+                <li>Collaborated with the sales team to deliver actionable insights from QA findings.</li>
+            </ul>
+            
+            <h5 style="margin-top: 10px; margin-bottom: 5px; color: #777; font-size: 14px; font-weight: 500;">Quality Control Documentations:</h5>
+            <div class="gallery-grid">
+                <a href="https://drive.google.com/file/d/1c-p-aG2L0AQK83TFbHsmK1kYsjzkC87R/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1c-p-aG2L0AQK83TFbHsmK1kYsjzkC87R&sz=w400" alt="Algorithmics QC Documentation 1">
+                </a>
+                <a href="https://drive.google.com/file/d/1S-H09KJX44i3f8W88haNr8UMv8p--IF7/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1S-H09KJX44i3f8W88haNr8UMv8p--IF7&sz=w400" alt="Algorithmics QC Documentation 2">
+                </a>
+                <a href="https://drive.google.com/file/d/1H3paLl2y1CoGoXzV21LK9H3NODIOYct_/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1H3paLl2y1CoGoXzV21LK9H3NODIOYct_&sz=w400" alt="Algorithmics QC Documentation 3">
+                </a>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #eee; margin: 30px 0;">
+
+            <h4>Trial Class Manager (Sales Representative)</h4>
+            <p class="date-text">Jan 2023 – Jan 2025</p>
+            <ul class="bullet-list">
+                <li>Delivered engaging Zoom trial sessions for children and parents, dedicating up to 6 hours daily to showcasing program value and encouraging interaction.</li>
+                <li>Achieved strong conversion rates through clear communication, CRM-based lead tracking, and consistent follow-ups.</li>
+                <li>Prepared daily performance reports using Google Sheets to support transparency, planning, and customer retention.</li>
+            </ul>
+            
+            <h5 style="margin-top: 10px; margin-bottom: 5px; color: #777; font-size: 14px; font-weight: 500;">Trial Class Documentations:</h5>
+            <div class="gallery-grid">
+                <a href="https://drive.google.com/file/d/1L_7NAvqzDODqGshHdTWOTq34KWg1Issz/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1L_7NAvqzDODqGshHdTWOTq34KWg1Issz&sz=w400" alt="Algorithmics Trial Class Documentation 1">
+                </a>
+                <a href="https://drive.google.com/file/d/1cdoY3C0etwMjX6u20lY1rZRoZjvrYF11/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1cdoY3C0etwMjX6u20lY1rZRoZjvrYF11&sz=w400" alt="Algorithmics Trial Class Documentation 2">
+                </a>
+                <a href="https://drive.google.com/file/d/1iVylk8iTAHU4ohpHeEP8UbNIl1vxDI8A/view" target="_blank" class="gallery-item" title="View Fullscreen">
+                    <img src="https://drive.google.com/thumbnail?id=1iVylk8iTAHU4ohpHeEP8UbNIl1vxDI8A&sz=w400" alt="Algorithmics Trial Class Documentation 3">
+                </a>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3><a href="https://daeahenc.co.kr/en/sub/sub02_01_02.php?cat_no=4&idx=12402&offset=168" target="_blank">Daeah Engineering and Construction (RDMP)</a></h3>
+            <h4>Document Control</h4>
+            <p class="date-text">Nov 2022 – Jan 2023</p>
+            <ul class="bullet-list">
+                <li>Managed document control processes and ensured compliance with company quality standards.</li>
+                <li>Verified accuracy and completeness of records before distribution to internal teams.</li>
+                <li>Maintained organized filing systems to ensure easy access and document security.</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3><a href="https://www.ruangguru.com/" target="_blank">PT Ruang Raya Indonesia (Ruangguru)</a></h3>
+            
+            <h4>Account Manager</h4>
+            <p class="date-text">Jul 2022 – Sep 2022</p>
+            <ul class="bullet-list">
+                <li>Oversaw key account performance, monitored sales activities, and ensured consultant targets were met.</li>
+                <li>Addressed partner feedback and resolved issues to maintain strong client relationships.</li>
+                <li>Delivered regular business development reports to support strategic decision-making.</li>
+            </ul>
+
+            <h4 style="margin-top: 25px;">Field Education Consultant</h4>
+            <p class="date-text">Nov 2021 – Nov 2022</p>
+            <ul class="bullet-list">
+                <li>Promoted digital learning solutions by visiting schools and presenting product value.</li>
+                <li>Supported regional sales performance and helped improve student academic outcomes.</li>
+                <li>Built relationships with school stakeholders to boost product adoption and engagement.</li>
+            </ul>
+            
+            <h5 style="margin-top: 30px; margin-bottom: 5px; color: #555; font-size: 16px;">Activity Documentations:</h5>
+            <div class="gallery-grid">
+                <a href="https://drive.google.com/file/d/16Kcib3xAMHNxnYALiI-035fwrSKNGH68/view" target="_blank" class="gallery-item" title="Click to view full screen">
+                    <img src="https://drive.google.com/thumbnail?id=16Kcib3xAMHNxnYALiI-035fwrSKNGH68&sz=w400" alt="Ruangguru Activity 1">
+                </a>
+                <a href="https://drive.google.com/file/d/1LjT8H8LF9FqPV-DUSvp8f0QqiguF7vL1/view" target="_blank" class="gallery-item" title="Click to view full screen">
+                    <img src="https://drive.google.com/thumbnail?id=1LjT8H8LF9FqPV-DUSvp8f0QqiguF7vL1&sz=w400" alt="Ruangguru Activity 2">
+                </a>
+                <a href="https://drive.google.com/file/d/1cfgoXz3K4x-q1dFNh902xoSTcj360tKk/view" target="_blank" class="gallery-item" title="Click to view full screen">
+                    <img src="https://drive.google.com/thumbnail?id=1cfgoXz3K4x-q1dFNh902xoSTcj360tKk&sz=w400" alt="Ruangguru Activity 3">
+                </a>
+                <a href="https://drive.google.com/file/d/1CvRtJxDiFad3Mwsxl80BnV6iRwE3X6L3/view" target="_blank" class="gallery-item" title="Click to view full screen">
+                    <img src="https://drive.google.com/thumbnail?id=1CvRtJxDiFad3Mwsxl80BnV6iRwE3X6L3&sz=w400" alt="Ruangguru Activity 4">
+                </a>
+                <a href="https://drive.google.com/file/d/1fuRd_wDmsEW2TLjD2-8BcdkbaVqD_8jh/view" target="_blank" class="gallery-item" title="Click to view full screen">
+                    <img src="https://drive.google.com/thumbnail?id=1fuRd_wDmsEW2TLjD2-8BcdkbaVqD_8jh&sz=w400" alt="Ruangguru Activity 5">
+                </a>
+                <a href="https://drive.google.com/file/d/16s61ZksqdUxTBNj7v_oWBSEByOGm0Jge/view" target="_blank" class="gallery-item" title="Click to view full screen">
+                    <img src="https://drive.google.com/thumbnail?id=16s61ZksqdUxTBNj7v_oWBSEByOGm0Jge&sz=w400" alt="Ruangguru Activity 6">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" style="background-color: transparent;">
+        <h2 class="section-title">Education & Certification</h2>
+        
+        <div class="edu-flex-container">
+            <a href="https://unmul.ac.id/" target="_blank" class="edu-left-link" title="Visit Universitas Mulawarman Website">
+                <div class="edu-left-brand">
+                    <img src="https://drive.google.com/thumbnail?id=1D9mzo_htXviryy8Rgw60fpTQqmm4Ds2A&sz=w400" alt="Universitas Mulawarman" class="univ-logo-img">
+                    <p class="univ-name-display">Universitas Mulawarman</p>
+                </div>
+            </a>
+
+            <div class="edu-right-details">
+                <h3 style="margin-top: 0; color: #0056b3; font-size: 22px;">B.A. English Literature</h3>
+                <p class="date-text" style="margin-top: -10px;">2015 - 2020</p>
+                
+                <hr style="border: 0; border-top: 1px dashed #eee; margin: 25px 0;">
+
+                <h4 style="color: #333; margin-bottom: 5px;">Organisational Experience</h4>
+                <div class="org-badge-container">
+                    <div class="org-badge-item">
+                        <span class="org-role-main">Minister of Student Advocacy and Welfare, BEM FIB Unmul</span>
+                        <span class="org-year-badge">2017</span>
+                    </div>
+                    <div class="org-badge-item">
+                        <span class="org-role-main">Chairperson of the String Study Group</span>
+                        <span class="org-year-badge">2018</span>
+                    </div>
+                    <div class="org-badge-item">
+                        <span class="org-role-main">Head of the Student Advocacy and Welfare Department, BEM FIB Unmul</span>
+                        <span class="org-year-badge">2019</span>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed #eee; margin: 30px 0;">
+
+                <h4 style="color: #333; margin-bottom: 5px;">Professional Certifications</h4>
+                <div class="cert-card-grid">
+                    <a href="https://drive.google.com/file/d/1LE3RjrjcPkE1tXtZVD6U1cPfcsgYMt8c/view?usp=drive_link" target="_blank" class="cert-card-item">
+                        <p class="cert-title">SEO 101 – By Skill Academy Ruangguru</p>
+                        <p class="cert-provider">Completion Verified</p>
+                        <p class="cert-footer">Completed: 2021</p>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kcEqQVSovCtejoaNYbvhHTNoQ5OWvjZ8/view?usp=drive_link" target="_blank" class="cert-card-item">
+                        <p class="cert-title">K3 Certification – By Rewata Consultant</p>
+                        <p class="cert-provider">Verified Completion</p>
+                        <p class="cert-footer">Completed: 2021</p>
+                    </a>
+                </div>
+            </div> 
+        </div>
+    </section>
+    
+    <section id="portfolio">
+        <h2 class="section-title">Portfolio Projects</h2>
+
+        <div class="portfolio-filter-container">
+            <button id="all-toggle-btn" class="filter-btn" onclick="toggleAllProjects()">Show All</button>
+            <button class="filter-btn" onclick="filterPortfolio('web-design', this)">Web Design</button>
+            <button class="filter-btn" onclick="filterPortfolio('google-sheet', this)">Google Sheets</button>
+            <button class="filter-btn" onclick="filterPortfolio('scratch-game', this)">Scratch Projects</button>
+        </div>
+
+        <div class="portfolio-items-grid">
+
+            <div class="portfolio-item web-design info-card" style="text-align: center; padding: 40px;">
+                <h3>Landing Page Algonova Semarang</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 15px; max-width: 700px; margin: 0 auto 30px auto;">A modern and interactive landing page built for Algonova Semarang.</p>
+                <div class="web-preview-wrapper">
+                    <iframe src="https://lp-algonovasmg.netlify.app/" class="web-preview-iframe" scrolling="yes" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <p style="font-size: 14px; margin-top: 25px;">
+                    <a href="https://lp-algonovasmg.netlify.app/" target="_blank" style="color: #0056b3; text-decoration: none; font-weight: 500;">Open Live Website in New Tab</a>
+                </p>
+            </div>
+
+            <div class="portfolio-item web-design info-card" style="text-align: center; padding: 40px;">
+                <h3>Class Tracker Algonova Semarang</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 15px; max-width: 700px; margin: 0 auto 30px auto;">A web application designed to track and manage class schedules and student progress for Algonova Semarang.</p>
+                <div class="web-preview-wrapper">
+                    <iframe src="https://tracking-class-algonovasmg.netlify.app/" class="web-preview-iframe" scrolling="yes" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <p style="font-size: 14px; margin-top: 25px;">
+                    <a href="https://tracking-class-algonovasmg.netlify.app/" target="_blank" style="color: #0056b3; text-decoration: none; font-weight: 500;">Open Live Web App in New Tab</a>
+                </p>
+            </div>
+            
+            <div class="portfolio-item google-sheet info-card" style="text-align: center; padding: 40px;">
+                <h3>Tutor Performance Tracking Dashboard</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 15px; max-width: 700px; margin: 0 auto 30px auto;">A comprehensive tracking dashboard built using Google Sheets to monitor, analyze, and manage tutor performance metrics effectively.</p>
+                <div class="web-preview-wrapper">
+                    <iframe src="https://docs.google.com/spreadsheets/d/1tJRb5WzD8h2DwR_lmWn7kjwBI5BTonJNB2OHERVLOLk/preview" class="web-preview-iframe" scrolling="yes" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <p style="font-size: 14px; margin-top: 25px;">
+                    <a href="https://docs.google.com/spreadsheets/d/1tJRb5WzD8h2DwR_lmWn7kjwBI5BTonJNB2OHERVLOLk/edit?usp=sharing" target="_blank" style="color: #0056b3; text-decoration: none; font-weight: 500;">Open Full Dashboard in Google Sheets</a>
+                </p>
+            </div>
+
+            <div class="portfolio-item google-sheet info-card" style="text-align: center; padding: 40px;">
+                <h3>Monthly Dashboard Algonova Semarang</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 15px; max-width: 700px; margin: 0 auto 30px auto;">An integrated analytics and tracking dashboard built using Google Sheets, specifically customized to trace, map, and analyze all branch revenue streams for Algonova Semarang.</p>
+                <div class="web-preview-wrapper">
+                    <iframe src="https://docs.google.com/spreadsheets/d/18ZEPuhTgk73Wjv905GF5m--DbFI5tYSmsdRY9kqoJqo/preview" class="web-preview-iframe" scrolling="yes" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <p style="font-size: 14px; margin-top: 25px;">
+                    <a href="https://docs.google.com/spreadsheets/d/18ZEPuhTgk73Wjv905GF5m--DbFI5tYSmsdRY9kqoJqo/edit?usp=sharing" target="_blank" style="color: #0056b3; text-decoration: none; font-weight: 500;">Open Full Dashboard in Google Sheets</a>
+                </p>
+            </div>
+
+            <div class="portfolio-item scratch-game info-card" style="text-align: center; padding: 40px;">
+                <h3>Interactive Scratch Game</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 15px; max-width: 700px; margin: 0 auto 30px auto;">Click the green flag to start and try playing my first game project directly below!</p>
+                <div class="embed-container" style="background-color: transparent; border: none; box-shadow: none; min-height: auto; margin-bottom: 10px;">
+                    <iframe src="https://scratch.mit.edu/projects/1072491168/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen style="border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 2px solid #e2e8f0;"></iframe>
+                </div>
+                <p style="font-size: 14px; margin-top: 25px;">
+                    <a href="https://scratch.mit.edu/projects/1072491168/fullscreen/" target="_blank" style="color: #0056b3; text-decoration: none; font-weight: 500;">Open V1 in Fullscreen Mode</a>
+                </p>
+            </div>
+
+            <div class="portfolio-item scratch-game info-card" style="text-align: center; padding: 40px;">
+                <h3>Project Story Telling</h3>
+                <p style="color: #666; margin-bottom: 25px; font-size: 15px; max-width: 700px; margin: 0 auto 30px auto;">An interactive storytelling project custom built using Scratch to highlight visual narration, timing structures, and logical asset coordination.</p>
+                <div class="embed-container" style="background-color: transparent; border: none; box-shadow: none; min-height: auto; margin-bottom: 10px;">
+                    <iframe src="https://scratch.mit.edu/projects/1082594957/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen style="border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 2px solid #e2e8f0;"></iframe>
+                </div>
+                <p style="font-size: 14px; margin-top: 25px;">
+                    <a href="https://scratch.mit.edu/projects/1082594957/fullscreen/" target="_blank" style="color: #0056b3; text-decoration: none; font-weight: 500;">Open Story Telling in Fullscreen Mode</a>
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        let allProjectsVisible = false; // Status awal saat halaman di-load: Semua tertutup
+
+        function filterPortfolio(category, btnElement) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            const toggleBtn = document.getElementById('all-toggle-btn');
+
+            // Cek apakah tombol yang diklik sudah dalam keadaan aktif
+            const isAlreadyActive = btnElement.classList.contains('active');
+
+            // Set semua tombol kategori menjadi tidak aktif
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Normalkan tombol "Show All"
+            toggleBtn.classList.remove('active');
+            toggleBtn.innerText = "Show All";
+            allProjectsVisible = false;
+
+            if (isAlreadyActive) {
+                // Jika tombol sudah aktif lalu diklik lagi -> Sembunyikan project
+                items.forEach(item => item.classList.remove('show'));
+            } else {
+                // Jika tombol belum aktif -> Aktifkan dan tampilkan project sesuai kategori
+                btnElement.classList.add('active');
+                items.forEach(item => {
+                    if (item.classList.contains(category)) {
+                        item.classList.add('show');
+                    } else {
+                        item.classList.remove('show');
+                    }
+                });
+            }
+        }
+
+        function toggleAllProjects() {
+            const items = document.querySelectorAll('.portfolio-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            const toggleBtn = document.getElementById('all-toggle-btn');
+
+            // Hapus status aktif dari semua tombol menu kategori lainnya
+            buttons.forEach(btn => {
+                if (btn.id !== 'all-toggle-btn') {
+                    btn.classList.remove('active');
+                }
+            });
+
+            if (allProjectsVisible) {
+                // Sembunyikan semua (Hide All)
+                items.forEach(item => item.classList.remove('show'));
+                toggleBtn.innerText = "Show All";
+                toggleBtn.classList.remove('active');
+                allProjectsVisible = false;
+            } else {
+                // Tampilkan semua (Show All)
+                items.forEach(item => item.classList.add('show'));
+                toggleBtn.innerText = "Hide All";
+                toggleBtn.classList.add('active');
+                allProjectsVisible = true;
+            }
+        }
+    </script>
+
+</body>
+</html>
